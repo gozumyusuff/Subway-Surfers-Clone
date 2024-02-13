@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 direction;
     public float forwardSpeed;
 
+    public float jumpForce;
+    public float gravity = -15;
+
     private int targetSide = 1;
     public float sideDistance = 4;
 
@@ -21,6 +24,19 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         direction.z = forwardSpeed;
+
+        direction.y += gravity * Time.deltaTime;
+
+
+
+        if (controller.isGrounded)
+       {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                Jump();
+            }
+       }
+
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -52,5 +68,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         controller.Move(direction * Time.fixedDeltaTime);
+    }
+
+    private void Jump()
+    {
+        direction.y = jumpForce;
     }
 }
