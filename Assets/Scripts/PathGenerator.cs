@@ -4,8 +4,30 @@ using UnityEngine;
 
 public class PathGenerator : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public GameObject PathPrefab;
+
+
+    public int PathNumber;
+    float previousZPosition;
+
+
+
+
+
+    private void Start()
     {
-        transform.position += new Vector3(0, 0, transform.GetChild(0).GetComponent<Renderer>().bounds.size.x * 2);
+        GeneratePaths();
     }
+
+    private void GeneratePaths()
+    {
+        int zPositition = -100;
+        for (int i = 0; i < PathNumber; i++)
+        {
+            zPositition += 100;
+            GameObject instantiatedPath = Instantiate(PathPrefab, this.transform);
+            instantiatedPath.transform.localPosition = new Vector3(0, 0, zPositition);
+        }
+    }
+
 }
