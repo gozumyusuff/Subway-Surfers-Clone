@@ -1,77 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController controller;
-    private Vector3 direction;
-    public float forwardSpeed;
+    public float moveSpeed = 10f;
+    public float sideSpeed = 5f;
+    public float jumpForce = 10f;
+    bool isMovingSide = false;
+    CharacterController controller;
+    Vector3 direction;
+    public Ease ease;
+    private float gravity = -15f;
 
-    public float jumpForce;
-    public float gravity = -15;
-
-    private int targetSide = 1;
-    public float sideDistance = 4;
-
-    private void Start()
+    void Start()
     {
         controller = GetComponent<CharacterController>();
+        direction.z = 5;
+
     }
 
-    private void Update()
+    private void Move(bool right)
     {
-        direction.z = forwardSpeed;
-
-        direction.y += gravity * Time.deltaTime;
-
-
-
-        if (controller.isGrounded)
-       {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                Jump();
-            }
-       }
-
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (isMovingSide)
         {
-            targetSide++;
-            if (targetSide == 3)
-                targetSide = 2;
+            return;
         }
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            targetSide--;
-            if (targetSide == -1)
-                targetSide = 0;
-        }
-
-        Vector3 targetPosition = transform.position.z * transform.forward + transform.position.y * transform.up;
-
-        if (targetSide == 0)
-        {
-            targetPosition += Vector3.left * sideDistance;
-        }else if (targetSide == 2)
-        {
-            targetPosition += Vector3.right * sideDistance;
-        }
-
-        transform.position = Vector3.Lerp(transform.position, targetPosition, 80 * Time.fixedDeltaTime);
+        isMovingSide = true;
+        int sign = right ? 1 : -1;  
+        transform.DOMoveX(transform.position.x + (sideSpeed * sign), 0.5f).SetEase(ease).OnComplete(()=> isMovingSide = false);
     }
-
-    private void FixedUpdate()
-    {
-        controller.Move(direction * Time.fixedDeltaTime);
-    }
-
     private void Jump()
     {
         direction.y = jumpForce;
     }
+
+    private void Update()
+    {
+        direction.y += gravity * Time.deltaTime;
+
+        if (controller.isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                Jump();
+            }
+        }
+
+        controller.Move(direction * Time.deltaTime * moveSpeed);
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Move(true);
+        }
+        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Move(false);
+        }
+    }
+
+
+
+
 }

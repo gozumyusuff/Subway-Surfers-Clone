@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    private const float V = -3f;
+    private const float yPosition = 0f;
     public GameObject[] ObstaclePrefabs;
     public Transform[] ObstaclePositionZ;
     public Transform[] ObstaclePositionX;
 
-
-    float yPosition = V;
-
-    
 
     void Start()
     {
@@ -34,6 +30,6 @@ public class ObstacleGenerator : MonoBehaviour
                         ObstaclePositionX[Random.Range(0, ObstaclePositionX.Length)].localPosition.x,
                         yPosition,
                         ObstaclePositionZ[i].localPosition.z);
-        }                
+        }
     }
 }

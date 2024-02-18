@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CameraController : MonoBehaviour
 {
     public Transform target;
-    private Vector3 offset;
-    void Start()
-    {
-        offset = transform.position - target.position;
-    }
+    public float followSpeed = 5f;
+    public Vector3 offset;
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-        Vector3 newPos = new Vector3(transform.position.x, transform.position.y, offset.z + target.position.z);
-        transform.position = Vector3.Lerp(transform.position, newPos, 10 * Time.deltaTime);
+        if (target == null)
+            return;
+
+        // Hedefin mevcut pozisyonunu ve kamera arasýndaki mesafeyi dikkate alarak yeni bir pozisyon hesaplayýn
+        Vector3 desiredPosition = target.position + offset;
+
+        // Yeni pozisyona doðru yumuþak geçiþ yaparak kamerayý güncelleyin
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
     }
 }

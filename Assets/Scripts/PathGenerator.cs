@@ -6,13 +6,8 @@ public class PathGenerator : MonoBehaviour
 {
     public GameObject PathPrefab;
 
-
     public int PathNumber;
-    float previousZPosition;
-
-
-
-
+    //float previousZPosition;
 
     private void Start()
     {
