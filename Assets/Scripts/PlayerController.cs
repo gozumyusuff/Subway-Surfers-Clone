@@ -1,64 +1,44 @@
 using UnityEngine;
-using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public float sideSpeed = 5f;
-    public float jumpForce = 10f;
-    bool isMovingSide = false;
-    CharacterController controller;
-    Vector3 direction;
-    public Ease ease;
-    private float gravity = -15f;
+    public float speed = 5f; // Karakterin ileri hareket hýzý
+    public float laneDistance = 4; // Her bir þerit arasý mesafe
+
+    private int desiredLane = 1; // Karakterin hedeflediði þerit
+    private Rigidbody rb;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
-        direction.z = 5;
-
-    }
-
-    private void Move(bool right)
-    {
-        if (isMovingSide)
-        {
-            return;
-        }
-        isMovingSide = true;
-        int sign = right ? 1 : -1;  
-        transform.DOMoveX(transform.position.x + (sideSpeed * sign), 0.5f).SetEase(ease).OnComplete(()=> isMovingSide = false);
-    }
-    private void Jump()
-    {
-        direction.y = jumpForce;
+        rb = GetComponent<Rigidbody>(); // Rigidbody bileþenini al
+        rb.velocity = new Vector3(0, 0, speed); // Baþlangýç hýzýný ayarla
     }
 
     private void Update()
     {
-        direction.y += gravity * Time.deltaTime;
+        rb.velocity = new Vector3(0, 0, speed); // Baþlangýç hýzýný ayarla
 
-        if (controller.isGrounded)
-        {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                Jump();
-            }
-        }
 
-        controller.Move(direction * Time.deltaTime * moveSpeed);
-
+        // Saða veya sola gitme
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            Move(true);
+            desiredLane++;
+            if (desiredLane == 3)
+                desiredLane = 2;
         }
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            Move(false);
+            desiredLane--;
+            if (desiredLane == -1)
+                desiredLane = 0;
         }
+
+        // Hedeflenen þerite doðru pozisyonu ayarlama
+        Vector3 targetPosition = transform.position;
+        targetPosition.z = desiredLane * laneDistance;
+
+        // Karakteri hedef pozisyona doðru yumuþak bir þekilde hareket ettirme
+        transform.position = Vector3.Lerp(transform.position, targetPosition, 80 * Time.deltaTime);
     }
-
-
-
-
 }
