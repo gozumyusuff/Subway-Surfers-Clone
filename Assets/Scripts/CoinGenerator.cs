@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CoinGenerator : MonoBehaviour
 {
@@ -8,21 +9,22 @@ public class CoinGenerator : MonoBehaviour
     public Transform[] CoinPositionZ;
     public Transform[] CoinPositionX;
 
-    float yPosition = 0f;
+    float yPosition = 3.25f;
 
 
     void Start()
     {
-        GenerateBalls();
+        GenerateCoins();
     }
 
-    private void GenerateBalls()
+
+    private void GenerateCoins()
     {
         for (int i = 0; i < CoinPositionZ.Length; i++)
         {
             GameObject instantiatedBall = Instantiate(CoinPrefabs[Random.Range(0, CoinPrefabs.Length)], this.transform);
 
-            instantiatedBall.transform.localPosition = new Vector3(CoinPositionX[Random.Range(0, 3)].localPosition.x, yPosition, CoinPositionZ[i].localPosition.z);
+            instantiatedBall.transform.localPosition = new Vector3(CoinPositionX[Random.Range(0, CoinPositionX.Length)].localPosition.x, yPosition, CoinPositionZ[i].localPosition.z);
         }
     }
 

@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1454147496}
   m_Layer: 0
-  m_Name: SpawnX
+  m_Name: ObsSpawnX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,7 +187,7 @@ Transform:
   - {fileID: 1604476244}
   - {fileID: 1736192317}
   m_Father: {fileID: 5734114788078704503}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1463283644
 GameObject:
@@ -261,7 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1659404941}
   m_Layer: 0
-  m_Name: SpawnZ
+  m_Name: ObsSpawnZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,7 +286,7 @@ Transform:
   - {fileID: 1430593127}
   - {fileID: 449525385}
   m_Father: {fileID: 5734114788078704503}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1736192316
 GameObject:
@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 1306903962038814690}
   m_Layer: 3
   m_Name: Mesh
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -496,6 +496,7 @@ MonoBehaviour:
   - {fileID: 1978775886026106, guid: bbc12ae2f967ec04e8c3c39eeb92733b, type: 3}
   - {fileID: 1070387196533242, guid: dc7c84106cc461e4f8dac748879dbe72, type: 3}
   - {fileID: 1109385109949186, guid: 37e681eb08549004c9d9c2be529cbf54, type: 3}
+  - {fileID: 1755429121576396, guid: 4a0ab548b1b39cf4b8b48726d5f4fbfe, type: 3}
   ObstaclePositionZ:
   - {fileID: 1281807404}
   - {fileID: 825055815}
@@ -537,8 +538,66 @@ Transform:
   m_Children:
   - {fileID: 1769123987}
   - {fileID: 3980946675651357592}
+  - {fileID: 4422397102869659274}
   - {fileID: 1454147496}
   - {fileID: 1659404941}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6139337002519995162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4422397102869659274}
+  - component: {fileID: 2943309788960792567}
+  m_Layer: 0
+  m_Name: CoinGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4422397102869659274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6139337002519995162}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5734114788078704503}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2943309788960792567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6139337002519995162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e267a558ba4ab4aad0a787c46dc42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoinPrefabs:
+  - {fileID: 1591165099382186, guid: 160a6121b4d25254da31bdab63ad82b7, type: 3}
+  CoinPositionZ:
+  - {fileID: 449525385}
+  - {fileID: 1430593127}
+  - {fileID: 1006951051}
+  - {fileID: 1913736699}
+  - {fileID: 825055815}
+  - {fileID: 1281807404}
+  CoinPositionX:
+  - {fileID: 1463283645}
+  - {fileID: 1604476244}
+  - {fileID: 1736192317}

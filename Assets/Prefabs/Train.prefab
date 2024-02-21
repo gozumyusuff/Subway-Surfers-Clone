@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5669269356545746817}
   m_Layer: 0
   m_Name: Train
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,7 +198,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 7e4cace35ee41bc41870fd214b6609e2, type: 3}
   m_PrefabInstance: {fileID: 3680862123817539716}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &6438468625519126901
+--- !u!64 &4209961412134758424
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,7 +212,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 7e4cace35ee41bc41870fd214b6609e2, type: 3}
---- !u!64 &4209961412134758424
+--- !u!64 &6438468625519126901
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
