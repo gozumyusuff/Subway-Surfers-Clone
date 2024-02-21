@@ -5,9 +5,7 @@ using UnityEngine;
 public class PathGenerator : MonoBehaviour
 {
     public GameObject PathPrefab;
-
     public int PathNumber;
-    //float previousZPosition;
 
     private void Start()
     {
@@ -24,5 +22,4 @@ public class PathGenerator : MonoBehaviour
             instantiatedPath.transform.localPosition = new Vector3(0, 0, zPositition);
         }
     }
-
 }
