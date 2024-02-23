@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public float maxSpeed;
 
+    private Animator animator;
+
+    private CapsuleCollider capsuleCollider;
+
     public static int numberOfCoins;
 
     float horizontalInput;
@@ -19,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         numberOfCoins = 0;
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -37,19 +42,35 @@ public class PlayerController : MonoBehaviour
         }
        
         horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Mathf.Clamp(horizontalInput, -3f, 3f);   
 
-        if (Input.GetButtonDown("Jump") && isGrounded) // Space tuþuna basýldý ve yerdeysek
+        if (Input.GetButtonDown("Jump") && isGrounded) 
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Y ekseninde zýplama kuvveti uygula
-            isGrounded = false; // Artýk havadayýz
+            animator.SetTrigger("isJump");
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); 
+            isGrounded = false; 
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow) && isGrounded)
+        {
+            animator.SetTrigger("isSlide");
+            
+            //isGrounded = false;
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground")) // Eðer temas ettiðimiz nesne "Ground" etiketine sahipse
+        if (collision.gameObject.CompareTag("Ground")) 
         {
-            isGrounded = true; // Yerdeyiz
+            isGrounded = true; 
         }
+
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            PlayerManager.gameOver = true;
+        }
+
+       
     }
 }
