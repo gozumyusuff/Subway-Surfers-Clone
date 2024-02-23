@@ -8,7 +8,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI bestScoreText;
+    public TextMeshProUGUI bestScoreText; 
 
     private float score = 0f;
     private float bestScore = 0f;
