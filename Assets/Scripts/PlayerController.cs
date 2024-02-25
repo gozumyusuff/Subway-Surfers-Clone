@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     bool isMoving = false;
 
+    private bool isJumping = false;
+
     private bool isGrounded;
 
     private Position currentPosition;
@@ -51,11 +53,16 @@ public class PlayerController : MonoBehaviour
 
         horizontalInput = Input.GetAxis("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && isGrounded) 
+        /*if (Input.GetButtonDown("Jump") && isGrounded) 
         {
             animator.SetTrigger("isJump");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); 
             isGrounded = false; 
+        }*/
+
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        {
+            Jump();
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && isGrounded)
@@ -77,6 +84,18 @@ public class PlayerController : MonoBehaviour
         {
             MoveToPosition(Mathf.RoundToInt(transform.position.x) - 3);
         }
+    }
+
+    private void Jump()
+    {
+        isJumping = true;
+        animator.SetTrigger("isJump"); // Zýplama animasyonunu baþlat
+    }
+
+    public void EndJumpAnimation() // Animasyonun bitimini algýlayan fonksiyon
+    {
+        isJumping = false;
+        // Buraya karakterin düþme animasyonunu baþlatma veya yerçekimi etkisini arttýrma kodunu ekleyebilirsiniz.
     }
 
 

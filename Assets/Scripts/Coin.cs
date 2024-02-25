@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Coin : MonoBehaviour
 {
-    public TextMeshProUGUI coinText;
+
 
     private void Update()
     {
@@ -15,13 +15,18 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+       if (other.gameObject.CompareTag("Obstacle") != null)
         {
-            PlayerController.numberOfCoins += 1;
-            //coinText.SetText("Coins:" + PlayerController.numberOfCoins);
-            coinText.text = "Coins: " + PlayerController.numberOfCoins;
             Destroy(gameObject);
+            return;
         }
+
+       if (other.gameObject.name != "Player")
+        {
+            return;
+        }
+
+        GameManager.inst.score--;
+        Destroy(gameObject);
     }
 }
-//scoreText.text = "Score: " + score.ToString("0");

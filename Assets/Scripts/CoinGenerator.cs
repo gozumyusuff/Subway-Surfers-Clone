@@ -9,7 +9,7 @@ public class CoinGenerator : MonoBehaviour
     public Transform[] CoinPositionZ;
     public Transform[] CoinPositionX;
 
-    float yPosition = 3.25f;
+    float yPosition = 1.5f;
 
 
     void Start()
