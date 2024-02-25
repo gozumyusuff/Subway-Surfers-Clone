@@ -76,11 +76,11 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.D) && Mathf.RoundToInt(transform.position.x) < 3f)
+        if (Input.GetKeyDown(KeyCode.RightArrow) && Mathf.RoundToInt(transform.position.x) < 3f)
         {
             MoveToPosition(Mathf.RoundToInt(transform.position.x) + 3);
         }
-        else if (Input.GetKeyDown(KeyCode.A) && Mathf.RoundToInt(transform.position.x) > -3f)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && Mathf.RoundToInt(transform.position.x) > -3f)
         {
             MoveToPosition(Mathf.RoundToInt(transform.position.x) - 3);
         }
